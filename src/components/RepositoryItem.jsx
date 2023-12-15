@@ -1,13 +1,14 @@
-import { Text, View, Image, StyleSheet } from 'react-native';
-
+import { View, Image, StyleSheet } from 'react-native';
+import theme from '../theme';
+import Text from './Text';
 
 const styles = StyleSheet.create({
   content: {
     backgroundColor: 'white',
-    fontSize: 16,
+    fontSize: theme.fontSizes.body,
   },
   boldText: {
-    fontWeight: 'bold',
+    fontWeight: theme.fontWeights.bold,
   },
   flexContainerHor: {
     flexDirection: 'row',

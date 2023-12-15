@@ -1,9 +1,9 @@
 import { FlatList, View, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
 import RepositoryItem from './RepositoryItem';
-
+import theme from '../theme';
 
 const styles = StyleSheet.create({
-  container: {
+  listContainer: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
     backgroundColor: '#e1e4e8',
@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   }
 });
+
 
 const repositories = [
   {
@@ -64,7 +65,7 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.listContainer}>
       <FlatList
         data={repositories}
         ItemSeparatorComponent={ItemSeparator}
