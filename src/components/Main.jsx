@@ -3,7 +3,6 @@ import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
 import { Route, Routes, Navigate } from 'react-router-native';
 import AppBar from './AppBar';
-import theme from '../theme';
 
 
 const styles = StyleSheet.create({

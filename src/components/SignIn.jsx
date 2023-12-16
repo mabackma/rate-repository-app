@@ -2,7 +2,6 @@ import { View, Button } from 'react-native';
 import { Formik } from 'formik';
 import FormikTextInput from './FormikTextInput';
 import * as yup from 'yup';
-import theme from '../theme';
 
 const initialValues = {
   name: '',
