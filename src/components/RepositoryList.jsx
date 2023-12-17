@@ -1,5 +1,4 @@
 import { FlatList, View, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
-import { useState, useEffect } from 'react';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 
@@ -24,7 +23,7 @@ const RepositoryList = () => {
     ? repositories.edges.map(edge => edge.node)
     : [];
 
-  console.log("REPOSITORY NODES:", repositoryNodes);
+  //console.log("REPOSITORY NODES:", repositoryNodes);
 
   return (
     <SafeAreaView style={styles.listContainer}>

@@ -19,4 +19,12 @@ const GET_REPOSITORIES = gql`
   }
 `;
 
-export default GET_REPOSITORIES;
+const SIGNED_IN = gql`
+  query Query {
+    me {
+      username
+    }
+  }
+`;
+
+export { GET_REPOSITORIES, SIGNED_IN };

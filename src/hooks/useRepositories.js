@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import GET_REPOSITORIES from '../graphql/queries';
+import { GET_REPOSITORIES } from '../graphql/queries';
 
 const useRepositories = () => {
   const { data, error, loading, refetch } = useQuery(GET_REPOSITORIES, {
@@ -8,7 +8,6 @@ const useRepositories = () => {
   });
 
   useEffect(() => {
-    // You can handle data, error, and loading here if needed
     if (loading) {
       console.log('Loading...');
     }
@@ -16,7 +15,7 @@ const useRepositories = () => {
       console.error('Error fetching repositories:', error);
     }
     if (data) {
-      console.log('Data:', data);
+      console.log('Data received');
     }
   }, [data, error, loading]);
 
