@@ -55,7 +55,7 @@ const Details = ({amount, detail}) => (
 );
 
 const RepositoryItem = ({ownerAvatarUrl, fullName, description, language, stargazersCount, forksCount, reviewCount, ratingAverage}) => (
-  <View style={styles.content}>
+  <View testID="repositoryItem" style={styles.content}>
     <View style={styles.flexContainerHor}>
       <Image style={styles.tinyLogo} source={{uri: ownerAvatarUrl}}/>
       <UserInfo fullName={fullName} description={description} language={language}/>
