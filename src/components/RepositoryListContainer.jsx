@@ -44,6 +44,3 @@ export const RepositoryListContainer = ({ repositories }) => {
     </SafeAreaView>
   );
 };
-
-
-export default RepositoryList;

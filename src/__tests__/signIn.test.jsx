@@ -1,55 +1,26 @@
-import { useState } from 'react';
-import { Text, TextInput, Pressable, View } from 'react-native';
-import { render, fireEvent, screen } from '@testing-library/react-native';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
+import SignInContainer from '../components/SignInContainer';
 
-const Form = ({ onSubmit }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
-    onSubmit({ username, password });
-  };
+describe('SignIn', () => {
+  describe('SignInContainer', () => {
+    it('calls onSubmit function with correct arguments when a valid form is submitted', async () => {
+      // render the SignInContainer component, fill the text inputs and press the submit button
+      const onSubmit = jest.fn();
+      render(<SignInContainer onSubmit={onSubmit}/>)
 
-  return (
-    <View>
-      <View>
-        <TextInput
-          value={username}
-          onChangeText={(text) => setUsername(text)}
-          placeholder="Username"
-        />
-      </View>
-      <View>
-        <TextInput
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          placeholder="Password"
-        />
-      </View>
-      <View>
-        <Pressable onPress={handleSubmit}>
-          <Text>Submit</Text>
-        </Pressable>
-      </View>
-    </View>
-  );
-};
+      fireEvent.changeText(screen.getByPlaceholderText('Username'), 'kalle');
+      fireEvent.changeText(screen.getByPlaceholderText('Password'), 'password');
+      fireEvent.press(screen.getByText('Sign In'));
 
-describe('Form', () => {
-  it('calls function provided by onSubmit prop after pressing the submit button', () => {
-    const onSubmit = jest.fn();
-    render(<Form onSubmit={onSubmit} />);
-
-    fireEvent.changeText(screen.getByPlaceholderText('Username'), 'kalle');
-    fireEvent.changeText(screen.getByPlaceholderText('Password'), 'password');
-    fireEvent.press(screen.getByText('Submit'));
-
-    expect(onSubmit).toHaveBeenCalledTimes(1);
-
-    // onSubmit.mock.calls[0][0] contains the first argument of the first call
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      username: 'kalle',
-      password: 'password',
+      // expect the onSubmit function to have been called once and with a correct first argument
+      await waitFor(() => {
+        expect(onSubmit).toHaveBeenCalledTimes(1);
+        expect(onSubmit.mock.calls[0][0]).toEqual({
+          name: 'kalle',
+          password: 'password',
+        });
+      });
     });
   });
 });
