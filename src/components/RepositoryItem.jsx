@@ -1,6 +1,8 @@
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Button, Pressable } from 'react-native';
 import theme from '../theme';
 import Text from './Text';
+import * as Linking from 'expo-linking';
+import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   content: {
@@ -36,7 +38,11 @@ const styles = StyleSheet.create({
     padding: 4, 
     marginTop: 16,
     alignSelf: 'flex-start',
-  }
+  },
+  center: { 
+    marginBottom: 8,
+    alignItems: 'center',
+  },
 });
 
 const UserInfo = ({fullName, description, language}) => (
@@ -54,20 +60,40 @@ const Details = ({amount, detail}) => (
   </View>
 );
 
-const RepositoryItem = ({ownerAvatarUrl, fullName, description, language, stargazersCount, forksCount, reviewCount, ratingAverage}) => (
-  <View testID="repositoryItem" style={styles.content}>
-    <View style={styles.flexContainerHor}>
-      <Image style={styles.tinyLogo} source={{uri: ownerAvatarUrl}}/>
-      <UserInfo fullName={fullName} description={description} language={language}/>
-    </View>
+const RepositoryItem = ({ownerAvatarUrl, fullName, description, language, stargazersCount, forksCount, reviewCount, ratingAverage, id, url, showButton}) => {
+  const navigate = useNavigate();
+  
+  const selectRepository = (id) => {
+    navigate(`/repositories/${id}`)
+  }
+  
+  const toGitHub = (url) => {
+    Linking.openURL(url)
+  }
 
-    <View style={styles.flexContainerHorSpread}>
-      <Details amount={stargazersCount} detail={"Stars"}/>
-      <Details amount={forksCount} detail={"Forks"}/>
-      <Details amount={reviewCount} detail={"Reviews"}/>
-      <Details amount={ratingAverage} detail={"Rating"}/>
+  return (
+    <View testID="repositoryItem" style={styles.content}>
+      <Pressable onPress={() => {selectRepository(id)}}>
+        <View style={styles.flexContainerHor}>
+          <Image style={styles.tinyLogo} source={{uri: ownerAvatarUrl}}/>
+          <UserInfo fullName={fullName} description={description} language={language}/>
+        </View>
+
+        <View style={styles.flexContainerHorSpread}>
+          <Details amount={stargazersCount} detail={"Stars"}/>
+          <Details amount={forksCount} detail={"Forks"}/>
+          <Details amount={reviewCount} detail={"Reviews"}/>
+          <Details amount={ratingAverage} detail={"Rating"}/>
+        </View>
+
+        {showButton ? (
+          <View style={styles.center}>
+            <Button onPress={() => toGitHub(url)} title="Open in GitHub" />
+          </View>
+        ) : null}
+      </Pressable>
     </View>
-  </View>
-);
+  )
+};
 
 export default RepositoryItem;

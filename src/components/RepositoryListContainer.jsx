@@ -1,5 +1,4 @@
 import { FlatList, View, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
-import RepositoryList from './RepositoryList';
 import RepositoryItem from './RepositoryItem';
 
 const styles = StyleSheet.create({
@@ -20,8 +19,6 @@ export const RepositoryListContainer = ({ repositories }) => {
     ? repositories.edges.map((edge) => edge.node)
     : [];
 
-  //console.log("REPOSITORY NODES:", repositoryNodes);
-
   return (
     <SafeAreaView style={styles.listContainer}>
       <FlatList
@@ -37,6 +34,9 @@ export const RepositoryListContainer = ({ repositories }) => {
             forksCount={item.forksCount}
             reviewCount={item.reviewCount}
             ratingAverage={item.ratingAverage}
+            id={item.id}
+            url={item.url}
+            showButton={false}
           />
         }
         keyExtractor={item => item.id}
