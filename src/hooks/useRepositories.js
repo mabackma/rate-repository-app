@@ -7,7 +7,7 @@ const useRepositories = () => {
     fetchPolicy: 'cache-and-network',
   });
 
-  const [repositories, setRepositories] = useState();
+  const [repositories, setRepositories] = useState(null);
 
   useEffect(() => {
     if (!loading && data) {
