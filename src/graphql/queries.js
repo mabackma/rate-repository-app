@@ -38,6 +38,29 @@ const GET_REPOSITORY_BY_ID = gql`
   }
 `;
 
+const GET_REVIEWS_BY_ID = gql`
+  query Repository($repositoryId: ID!) {
+    repository(id: $repositoryId) {
+      id
+      fullName
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 const SIGNED_IN = gql`
   query Query {
     me {
@@ -46,4 +69,4 @@ const SIGNED_IN = gql`
   }
 `;
 
-export { GET_REPOSITORIES, SIGNED_IN, GET_REPOSITORY_BY_ID };
+export { GET_REPOSITORIES, GET_REPOSITORY_BY_ID, GET_REVIEWS_BY_ID, SIGNED_IN };
