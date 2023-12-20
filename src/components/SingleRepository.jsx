@@ -4,7 +4,7 @@ import { useParams } from "react-router-native";
 import { useEffect } from "react";
 import Text from "./Text";
 import useReviews from "../hooks/useReviews";
-import { FlatList, View, StyleSheet, StatusBar, SafeAreaView } from "react-native";
+import { FlatList, View, StyleSheet } from "react-native";
 
 
 const styles = StyleSheet.create({
