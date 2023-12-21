@@ -78,9 +78,11 @@ const UserItem = ({review}) => {
       <Text>
         {`${createDate(review.createdAt)}`}
       </Text>
-      <Text>
-        {`${review.text}`}
-      </Text>
+      <View style={{ width: '90%' }}>
+        <Text>
+          {`${review.text}`}
+        </Text>
+      </View>
     </View>
   )
 }
