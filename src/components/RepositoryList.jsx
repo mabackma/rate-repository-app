@@ -4,6 +4,8 @@ import { StyleSheet, StatusBar, SafeAreaView } from 'react-native';
 import { useState } from 'react';
 import OrderPicker from './OrderPicker';
 
+import { Searchbar } from 'react-native-paper';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -15,10 +17,18 @@ const styles = StyleSheet.create({
 
 const RepositoryList = () => {
   const [order, setOrder] = useState('latest');
-  const { repositories } = useRepositories(order);
+  const [searchQuery, setSearchQuery] = useState('');
+  const onChangeSearch = query => setSearchQuery(query);
+
+  const { repositories } = useRepositories(order, searchQuery);
 
   return (
     <SafeAreaView style={styles.container}>
+    <Searchbar
+      placeholder="Search"
+      onChangeText={onChangeSearch}
+      value={searchQuery}
+    />
       <OrderPicker order={order} setOrder={setOrder}/>
       <RepositoryListContainer repositories={repositories} />
     </SafeAreaView>
