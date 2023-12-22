@@ -48,7 +48,9 @@ const styles = StyleSheet.create({
 const UserInfo = ({fullName, description, language}) => (
   <View >
     <Text style={styles.boldText}>{fullName}</Text>
-    <Text>{description}</Text>
+    <View style={{ width: '90%' }}>
+      <Text>{description}</Text>
+    </View>
     <Text style={styles.blueContainer}>{language}</Text>
   </View>
 );
