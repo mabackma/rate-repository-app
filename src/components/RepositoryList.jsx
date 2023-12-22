@@ -1,7 +1,7 @@
 import { RepositoryListContainer } from './RepositoryListContainer';
 import useRepositories from '../hooks/useRepositories';
 import { StyleSheet, StatusBar, SafeAreaView } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import OrderPicker from './OrderPicker';
 
 
@@ -15,12 +15,7 @@ const styles = StyleSheet.create({
 
 const RepositoryList = () => {
   const [order, setOrder] = useState('latest');
-  const { repositories, refetch } = useRepositories(order);
-
-  useEffect(() => {
-    console.log("ORDER", order)
-    setOrder(order)
-  }, [order]);
+  const { repositories } = useRepositories(order);
 
   return (
     <SafeAreaView style={styles.container}>
