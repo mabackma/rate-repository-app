@@ -46,12 +46,19 @@ const AppBar = () => {
       </Link>
       ) : (null)}
       {username ? (
-        <Link onPress={handleSignOut} to="/sign-in">
+        <Link onPress={handleSignOut} to="/">
           <Text style={styles.title}>Sign out</Text>
         </Link>
       ) : (
         <Link to="/sign-in">
           <Text style={styles.title}>Sign in</Text>
+        </Link>
+      )}
+      {username ? (
+        null
+      ) : (
+        <Link to="/sign-up">
+          <Text style={styles.title}>Sign up</Text>
         </Link>
       )}
     </ScrollView>
