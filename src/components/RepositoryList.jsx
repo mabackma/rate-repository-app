@@ -24,11 +24,11 @@ const RepositoryList = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-    <Searchbar
-      placeholder="Search"
-      onChangeText={onChangeSearch}
-      value={searchQuery}
-    />
+      <Searchbar
+        placeholder="Search"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+      />
       <OrderPicker order={order} setOrder={setOrder}/>
       <RepositoryListContainer repositories={repositories} />
     </SafeAreaView>

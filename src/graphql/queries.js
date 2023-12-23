@@ -61,12 +61,24 @@ const GET_REVIEWS_BY_ID = gql`
   }
 `;
 
-const SIGNED_IN = gql`
-  query Query {
+const GET_CURRENT_USER = gql`
+  query getCurrentUser($includeReviews: Boolean = false) {
     me {
       username
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            createdAt
+            rating
+            text
+            repository {
+              fullName
+            }
+          }
+        }
+      }
     }
   }
 `;
 
-export { GET_REPOSITORIES, GET_REPOSITORY_BY_ID, GET_REVIEWS_BY_ID, SIGNED_IN };
+export { GET_REPOSITORIES, GET_REPOSITORY_BY_ID, GET_REVIEWS_BY_ID, GET_CURRENT_USER };
