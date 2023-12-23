@@ -21,7 +21,6 @@ const MyReviews = () => {
     user: {username: item.repository.fullName}
   }));
   
-  console.log("REVIEWS:", reviews)
   return (
     <FlatList
       data={reviews}

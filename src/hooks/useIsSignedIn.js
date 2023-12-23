@@ -10,7 +10,7 @@ const useIsSignedIn = (includeReviews = false) => {
 
   useEffect(() => {
     if (data && data.me) {
-      console.log('User is signed in. Reviews:', data.me);
+      console.log('User is signed in', data.me);
     }
   }, [data]);
 
