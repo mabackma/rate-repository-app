@@ -20,9 +20,8 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const Buttons = ({reponame}) => {
+const Buttons = ({reponame, me, refetch}) => {
   const navigate = useNavigate();
-  const user = useIsSignedIn();
   const [deleteReview] = useDeleteReview();
 
   const getRepoId = (reponame) => {
@@ -30,14 +29,20 @@ const Buttons = ({reponame}) => {
   }
 
   const deleteUserReview = (reponame) => {
-    reviewToDeleteId = user.me.id + '.' + getRepoId(reponame);
+    reviewToDeleteId = me.id + '.' + getRepoId(reponame);
 
     Alert.alert('Alert Title', 'My Alert Msg', [
       {
         text: 'Cancel',
         onPress: () => console.log('Cancel Pressed'),
       },
-      {text: 'OK', onPress: () => deleteReview(reviewToDeleteId)},
+      {        
+        text: 'OK',
+        onPress: async () => {
+          await deleteReview(reviewToDeleteId);
+          await refetch();
+        },
+      },
     ]);
   }
 
@@ -58,7 +63,7 @@ const Buttons = ({reponame}) => {
 }
 
 const MyReviews = () => {
-  const { me } = useIsSignedIn(true);
+  const { me, refetch } = useIsSignedIn(true);
 
   const nodes = me?.reviews.edges.map((item => item.node));
   const reviews = nodes?.map(item => ({
@@ -73,7 +78,7 @@ const MyReviews = () => {
       renderItem={({ item }) => (
         <>
           <ReviewItem review={item} />
-          <Buttons reponame={item.user.username}/>
+          <Buttons reponame={item.user.username} me={me} refetch={refetch}/>
         </>
       )}
       keyExtractor={({ id }) => id}

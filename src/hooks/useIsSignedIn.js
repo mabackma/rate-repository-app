@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../graphql/queries';
 
 const useIsSignedIn = (includeReviews = false) => {
-  const { data } = useQuery(GET_CURRENT_USER, {
+  const { data, refetch } = useQuery(GET_CURRENT_USER, {
     variables: { includeReviews },
     fetchPolicy: 'cache-and-network',
   });
@@ -14,7 +14,7 @@ const useIsSignedIn = (includeReviews = false) => {
     }
   }, [data]);
 
-  return { me: data?.me };
+  return { me: data?.me, refetch };
 };
 
 export default useIsSignedIn;
