@@ -55,7 +55,6 @@ const SingleRepository = () => {
     fetchData();
   }, [repository]);
 
-  console.log("SINGLE REPOSITORY REVIEWS:", reviews)
   return (
     <FlatList
       data={reviews}

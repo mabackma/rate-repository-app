@@ -64,6 +64,7 @@ const GET_REVIEWS_BY_ID = gql`
 const GET_CURRENT_USER = gql`
   query getCurrentUser($includeReviews: Boolean = false) {
     me {
+      id
       username
       reviews @include(if: $includeReviews) {
         edges {
