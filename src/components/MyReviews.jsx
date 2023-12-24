@@ -31,7 +31,7 @@ const Buttons = ({reponame, me, refetch}) => {
   const deleteUserReview = (reponame) => {
     reviewToDeleteId = me.id + '.' + getRepoId(reponame);
 
-    Alert.alert('Alert Title', 'My Alert Msg', [
+    Alert.alert('DELETE', 'Are you sure you want to delete this review?', [
       {
         text: 'Cancel',
         onPress: () => console.log('Cancel Pressed'),
