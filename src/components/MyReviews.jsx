@@ -1,6 +1,6 @@
 import useIsSignedIn from "../hooks/useIsSignedIn";
 import ReviewItem from "./ReviewItem";
-import { View, FlatList, StyleSheet, Button } from 'react-native';
+import { View, FlatList, StyleSheet, Button, Alert } from 'react-native';
 import { useNavigate } from "react-router-native";
 import useDeleteReview from "../hooks/useDeleteReview";
 
@@ -30,9 +30,15 @@ const Buttons = ({reponame}) => {
   }
 
   const deleteUserReview = (reponame) => {
-    // ALERT!!!
     reviewToDeleteId = user.me.id + '.' + getRepoId(reponame);
-    deleteReview(reviewToDeleteId);
+
+    Alert.alert('Alert Title', 'My Alert Msg', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+      },
+      {text: 'OK', onPress: () => deleteReview(reviewToDeleteId)},
+    ]);
   }
 
   return (
